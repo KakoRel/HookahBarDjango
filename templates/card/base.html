@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Calyan Bar - Кальян-бар премиум класса{% endblock %}</title>
+    <style>
+        :root {
+            --bronze: #cd7f32;
+            --bronze-glow: rgba(205, 127, 50, 0.7);
+            --dark-bg: #1a1a1a;
+            --darker-bg: #0d0d0d;
+            --text-light: #e6e6e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2a2a2a 100%);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: var(--darker-bg);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--bronze);
+            box-shadow: 0 0 20px var(--bronze-glow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link:hover {
+            color: var(--bronze);
+            border-color: var(--bronze);
+            box-shadow: 0 0 15px var(--bronze-glow);
+            text-shadow: 0 0 10px var(--bronze-glow);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .card {
+            background: rgba(13, 13, 13, 0.9);
+            border: 1px solid var(--bronze);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px var(--bronze-glow);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        h1, h2, h3 {
+            color: var(--bronze);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--bronze);
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 2em;
+            border-left: 4px solid var(--bronze);
+            padding-left: 15px;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: var(--text-light);
+        }
+        
+        .btn-bronze {
+            background: transparent;
+            color: var(--bronze);
+            border: 2px solid var(--bronze);
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-bronze:hover {
+            background: var(--bronze);
+            color: var(--darker-bg);
+            box-shadow: 0 0 20px var(--bronze-glow);
+            transform: scale(1.05);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px var(--bronze),
+                         0 0 20px var(--bronze),
+                         0 0 30px var(--bronze);
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from {
+                text-shadow: 0 0 10px var(--bronze),
+                             0 0 20px var(--bronze),
+                             0 0 30px var(--bronze);
+            }
+            to {
+                text-shadow: 0 0 15px var(--bronze),
+                             0 0 25px var(--bronze),
+                             0 0 35px var(--bronze),
+                             0 0 40px var(--bronze);
+            }
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin: 20px 0;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item-info {
+            flex: 1;
+        }
+        
+        .menu-item-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--bronze);
+            margin-left: 20px;
+        }
+        
+        .review-form {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 5px;
+            color: var(--bronze);
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 1em;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .rating-stars {
+            color: var(--bronze);
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        
+        .location-card {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .news-item {
+            margin: 25px 0;
+            padding: 20px;
+            border-left: 3px solid var(--bronze);
+            background: rgba(205, 127, 50, 0.1);
+        }
+        
+        .news-date {
+            color: var(--bronze);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .hero-title {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="nav-link" href="{% url 'home' %}">Главная</a>
+            <a class="nav-link" href="{% url 'menu' %}">Меню</a>
+            <a class="nav-link" href="{% url 'news' %}">Новости</a>
+            <a class="nav-link" href="{% url 'locations' %}">Локации</a>
+            <a class="nav-link" href="{% url 'reviews' %}">Отзывы</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

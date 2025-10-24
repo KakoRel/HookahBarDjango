@@ -1,0 +1,55 @@
+{% extends 'card/base.html' %}
+
+{% block content %}
+<h1 class="neon-text">Отзывы</h1>
+
+<div class="card">
+    <h2>Оставьте ваш отзыв</h2>
+    <form method="post" class="review-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="author">Ваше имя:</label>
+            <input type="text" id="author" name="author" required maxlength="100">
+        </div>
+        
+        <div class="form-group">
+            <label for="rating">Ваша оценка:</label>
+            <select id="rating" name="rating" required>
+                <option value="5">★★★★★ - Отлично</option>
+                <option value="4">★★★★☆ - Очень хорошо</option>
+                <option value="3">★★★☆☆ - Хорошо</option>
+                <option value="2">★★☆☆☆ - Удовлетворительно</option>
+                <option value="1">★☆☆☆☆ - Плохо</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="text">Текст отзыва:</label>
+            <textarea id="text" name="text" required placeholder="Поделитесь вашими впечатлениями..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn-bronze">Отправить отзыв</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Отзывы наших гостей</h2>
+    {% for review in reviews %}
+    <div class="menu-item">
+        <div class="menu-item-info">
+            <h3>{{ review.author }}</h3>
+            <div class="rating-stars">
+                {% with ''|center:review.rating as range %}
+                {% for _ in range %}★{% endfor %}
+                {% endwith %}
+                ({{ review.rating }}/5)
+            </div>
+            <p>{{ review.text|linebreaks }}</p>
+            <p class="news-date">{{ review.created_at|date:"d.m.Y H:i" }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>Пока нет отзывов. Будьте первым!</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'card/base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <h1 class="hero-title neon-text">CALYAN BAR</h1>
+    <p class="hero-subtitle">Премиум кальян-бар с атмосферой роскоши и комфорта</p>
+    <button class="btn-bronze" onclick="location.href='{% url 'menu' %}'">Посмотреть меню</button>
+</div>
+
+<div class="card">
+    <h2>О нашем баре</h2>
+    <p>Calyan Bar - это место, где встречаются изысканный вкус, неповторимая атмосфера и высочайший уровень сервиса. Мы предлагаем широкий выбор кальянов премиум-класса, авторские коктейли и уютную обстановку для идеального отдыха.</p>
+</div>
+
+<div class="card">
+    <h2>Последние новости</h2>
+    {% for news in latest_news %}
+    <div class="news-item">
+        <h3>{{ news.title }}</h3>
+        <p class="news-date">{{ news.created_at|date:"d.m.Y" }}</p>
+        <p>{{ news.content|truncatewords:30 }}</p>
+    </div>
+    {% empty %}
+    <p>Скоро здесь появятся новости...</p>
+    {% endfor %}
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="btn-bronze" onclick="location.href='{% url 'news' %}'">Все новости</button>
+    </div>
+</div>
+{% endblock %}

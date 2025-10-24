@@ -1,0 +1,17 @@
+{% extends 'card/base.html' %}
+
+{% block content %}
+<h1 class="neon-text">Новости</h1>
+
+{% for news in news_list %}
+<div class="card">
+    <h2>{{ news.title }}</h2>
+    <p class="news-date">Опубликовано: {{ news.created_at|date:"d.m.Y H:i" }}</p>
+    <p>{{ news.content|linebreaks }}</p>
+</div>
+{% empty %}
+<div class="card">
+    <p>Следите за обновлениями, скоро здесь появятся новости!</p>
+</div>
+{% endfor %}
+{% endblock %}

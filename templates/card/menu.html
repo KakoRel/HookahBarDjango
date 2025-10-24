@@ -1,0 +1,26 @@
+{% extends 'card/base.html' %}
+
+{% block content %}
+<h1 class="neon-text">Наше Меню</h1>
+
+{% for category in categories %}
+<div class="card">
+    <h2>{{ category.name }}</h2>
+    {% for item in category.menuitem_set.all %}
+    <div class="menu-item">
+        <div class="menu-item-info">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+        </div>
+        <div class="menu-item-price">{{ item.price }} руб.</div>
+    </div>
+    {% empty %}
+    <p>Раздел в разработке...</p>
+    {% endfor %}
+</div>
+{% empty %}
+<div class="card">
+    <p>Меню скоро будет обновлено...</p>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'card/base.html' %}
+
+{% block content %}
+<h1 class="neon-text">Наши Локации</h1>
+
+{% for location in locations %}
+<div class="card location-card">
+    <h2>Calyan Bar</h2>
+    <p style="font-size: 1.2em; margin: 15px 0;">{{ location.address|linebreaks }}</p>
+    <p><strong>Телефон:</strong> {{ location.phone }}</p>
+    <p><strong>Часы работы:</strong> {{ location.working_hours }}</p>
+    <div style="margin: 20px 0;">
+        <button class="btn-bronze" onclick="window.open('{{ location.map_link }}', '_blank')">Посмотреть на карте</button>
+    </div>
+</div>
+{% empty %}
+<div class="card">
+    <p>Информация о локациях скоро появится...</p>
+</div>
+{% endfor %}
+{% endblock %}
